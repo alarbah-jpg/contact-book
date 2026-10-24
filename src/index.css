@@ -1,0 +1,196 @@
+/* ===== Design tokens: change these first to re-theme the whole site ===== */
+:root {
+  --bg: #e6e8f8;          /* periwinkle page */
+  --surface: #ffffff;
+  --ink: #1b1a3a;         /* deep indigo text */
+  --ink-soft: #55557a;
+  --line: #d3d5ee;
+  --accent: #4b2fe0;      /* violet */
+  --accent-dark: #3720b8;
+  --accent-tint: #efecff;
+  --danger: #b3261e;
+  --danger-bg: #fdecea;
+  --focus: #e0561f;       /* orange focus ring stands out on violet/white */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --space: 1rem;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem var(--space) 3.5rem;
+}
+
+/* ----- Header: big serif title, count sits beside it ----- */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.75rem;
+}
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+h2 {
+  margin: 0 0 var(--space);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+.subtitle {
+  margin: 0;
+  padding: 0.2rem 0.75rem;
+  background: var(--accent-tint);
+  color: var(--accent-dark);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ----- Layout: stacked on phones, form + list on larger screens ----- */
+.layout { display: grid; gap: 1.25rem; align-items: start; }
+
+.panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 0 var(--line), 0 12px 32px -18px rgba(27, 26, 58, 0.35);
+}
+/* The add form gets the strong color so it reads as the main action */
+.panel:first-child { background: var(--ink); color: #fff; }
+.panel:first-child label { color: #fff; }
+.panel:first-child .optional { color: #c7c8f0; }
+.panel:first-child .error { color: #ffb4ab; }
+
+/* ----- Form ----- */
+.field { margin-bottom: var(--space); }
+label { display: block; margin-bottom: 0.35rem; font-weight: 700; font-size: 0.95rem; }
+.optional { font-weight: 400; color: var(--ink-soft); }
+
+input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid #9a9cc7;
+  border-radius: var(--radius-sm);
+}
+input::placeholder { color: #75779c; }
+input[aria-invalid='true'] { border-color: var(--danger); background: var(--danger-bg); }
+
+.error { margin: 0.4rem 0 0; color: var(--danger); font-size: 0.9rem; font-weight: 500; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ----- Buttons ----- */
+.btn {
+  font: inherit;
+  font-weight: 700;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background-color 0.15s, color 0.15s;
+}
+.btn-primary { width: 100%; background: #fff; color: var(--ink); }
+.btn-primary:hover { background: var(--accent-tint); }
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: var(--danger);
+  padding: 0.4rem 0.9rem;
+  min-height: 40px;
+}
+.btn-danger:hover { background: var(--danger); color: #fff; }
+
+/* ----- Contact cards ----- */
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.contact {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  background: var(--accent-tint);
+  border-radius: var(--radius-sm);
+}
+.avatar {
+  width: 2.9rem;
+  height: 2.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+/* Avatar colors cycle so neighbours are easy to tell apart (CSS only) */
+.contact:nth-child(4n + 2) .avatar { background: #0d7a6b; }
+.contact:nth-child(4n + 3) .avatar { background: #b4306b; }
+.contact:nth-child(4n + 4) .avatar { background: #8a5a00; }
+
+.contact-info { min-width: 0; }
+.contact-name { margin: 0; font-weight: 700; font-size: 1.05rem; }
+.contact-detail { margin: 0; color: var(--ink-soft); font-size: 0.92rem; overflow-wrap: anywhere; }
+
+.empty {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--ink-soft);
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-sm);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 380px) {
+  .contact { grid-template-columns: auto 1fr; }
+  .btn-danger { grid-column: 2; justify-self: start; }
+}
+
+@media (min-width: 768px) {
+  .page { padding-top: 3rem; }
+  .layout { grid-template-columns: minmax(17rem, 1fr) 1.5fr; gap: 1.5rem; }
+  .panel { padding: 1.75rem; }
+  .panel:first-child { position: sticky; top: 1.5rem; }
+}
+
+@media (min-width: 1100px) {
+  .contact-list { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
