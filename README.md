@@ -2,7 +2,7 @@
 
 A single-page React app (Vite) for adding, listing, searching, and deleting contacts. Data lives in memory for the session only.
 
-**Live site:** https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+**Live site:** https://alarbah-jpg.github.io/contact-book/
 
 ## Features
 - Add a contact (Name and Email required, Phone optional) with controlled inputs and inline validation
